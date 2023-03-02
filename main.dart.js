@@ -65249,7 +65249,7 @@ return r===$?this.x=A.fR(s,s,B.r,s,s,s,s,s,s,s,s,15,s,s,B.cR,s,s,!0,s,s,s,s,s,s,
 A.EI.prototype={
 I(a){var s=null,r=A.aW(a).RG,q=A.ez(r.a),p=A.ez(r.b),o=A.ez(r.c),n=A.ez(r.d),m=A.ez(r.e),l=A.ez(r.f),k=A.ez(r.r),j=A.ez(r.w),i=A.ez(r.x)
 i=A.ai9(s,B.hk,A.ae0(A.ez(r.y),A.ez(r.z),A.ez(r.Q),q,p,o,n,m,l,A.ez(r.as),A.ez(r.at),A.ez(r.ax),k,j,i),s)
-return new A.vk(A.apz(new A.Yb(),A.a([new A.tu(new A.qW(new A.Yc(),s,s,s,A.avo(),A.aup(),t.XZ),s,s,s,s,t.OK)],t.Ds)),"Flutter Demo",i,!1,s)}}
+return new A.vk(A.apz(new A.Yb(),A.a([new A.tu(new A.qW(new A.Yc(),s,s,s,A.avo(),A.aup(),t.XZ),s,s,s,s,t.OK)],t.Ds)),"Wellbeing coach",i,!1,s)}}
 A.Yc.prototype={
 $1(a){return new A.iV(A.a([0.3,1,1,0.6,0.7,1,0.2],t.up),$.aL())},
 $S:377}
