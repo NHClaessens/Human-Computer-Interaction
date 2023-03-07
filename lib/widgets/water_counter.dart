@@ -14,9 +14,14 @@ class WaterCounter extends StatefulWidget {
 }
 
 class _WaterCounterState extends State<WaterCounter> {
+
+  final TextEditingController waterController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     context.watch<BackEnd>();
+    waterController.text = "${context.watch<BackEnd>().currentWater.round()}";
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -30,26 +35,101 @@ class _WaterCounterState extends State<WaterCounter> {
           Text("water intake", style: Constants().mediumText.copyWith(color: Constants().primaryColor)),
           Text("1.5 liters recommended", style: Constants().smallText.copyWith(color: Colors.grey)),
           Constants().spacing,
-          GestureDetector(
-            onTap: () {
-              context.read<BackEnd>().setWater(context.read<BackEnd>().currentWater + 300);
-            },
+          SizedBox(
+            height: 70,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 50,),
-                FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 50,),
-                FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 50,),
-                FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 50,),
-                FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 50,),
+                GestureDetector(
+                  onTap: () {
+                    context.read<BackEnd>().setWater(context.read<BackEnd>().currentWater + 150);
+                  },
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 30,),
+                      const Spacer(),
+                      const Text("150ml")
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    context.read<BackEnd>().setWater(context.read<BackEnd>().currentWater + 200);
+                  },
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 35,),
+                      const Spacer(),
+                      const Text("200ml")
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    context.read<BackEnd>().setWater(context.read<BackEnd>().currentWater + 250);
+                  },
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 40,),
+                      const Spacer(),
+                      const Text("250ml")
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    context.read<BackEnd>().setWater(context.read<BackEnd>().currentWater + 300);
+                  },
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 45,),
+                      const Spacer(),
+                      const Text("300ml")
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    context.read<BackEnd>().setWater(context.read<BackEnd>().currentWater + 350);
+                  },
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 50,),
+                      const Spacer(),
+                      const Text("350ml")
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
           Constants().spacing,
-          Text("${context.watch<BackEnd>().currentWater.round()}/${context.watch<BackEnd>().waterGoal.round()} ml", style: Constants().smallText,),
+          Row(
+            children: [
+              IntrinsicWidth(
+                child: TextField(
+                  controller: waterController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration.collapsed(
+                    hintText: "__",
+                  ),
+                  onSubmitted: (value) {
+                    context.read<BackEnd>().setWater(double.parse(value));
+                  },
+                ),
+              ),
+              Text("/ ${context.watch<BackEnd>().waterGoal.round()} ml", style: Constants().smallText,),
+            ],
+          ),
           Constants().spacing,
           Slider(
             min: 0,
+            divisions: (context.read<BackEnd>().waterGoal / 10).round(),
             max: context.read<BackEnd>().waterGoal,
             value: context.watch<BackEnd>().currentWater, 
             onChanged: (value){context.read<BackEnd>().setWater(value);},
