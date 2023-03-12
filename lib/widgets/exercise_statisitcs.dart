@@ -74,7 +74,7 @@ class ExercisesStatistics extends StatelessWidget {
               Column(
                 children: [
                   Text("1256/2200", style: Constants().smallText),
-                  Text("total kcal", style: Constants().smallText.copyWith(color: Colors.grey))
+                  Text("kcal burned today", style: Constants().smallText.copyWith(color: Colors.grey))
                 ],
               ),
               const Spacer(),
@@ -86,8 +86,8 @@ class ExercisesStatistics extends StatelessWidget {
               Constants().spacing,
               Column(
                 children: [
-                  Text("1256/2200", style: Constants().smallText),
-                  Text("total kcal", style: Constants().smallText.copyWith(color: Colors.grey))
+                  Text("2000/6000", style: Constants().smallText),
+                  Text("total steps", style: Constants().smallText.copyWith(color: Colors.grey))
                 ],
               ),
               const Spacer(),

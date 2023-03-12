@@ -35,7 +35,7 @@ class _MoodSelectorState extends State<MoodSelector> {
       },
       child: CircleAvatar(
         radius: 25,
-        backgroundColor: _index == index ? Constants().accentColor : Colors.grey.shade300,
+        backgroundColor: _index == index ? Constants().primaryColor : Colors.grey.shade300,
         child: Text(emojis[index], style: const TextStyle(fontSize: 30),),
       ),
     );

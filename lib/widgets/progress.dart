@@ -53,7 +53,7 @@ class _ProgressState extends State<Progress> {
               children: [
                 Row(
                   children: [
-                    FaIcon(context.read<BackEnd>().habits[index].icon),
+                    FaIcon(context.read<BackEnd>().habits[index].icon, color: Constants().accentColor,),
                     Constants().spacing,
                     Text(context.read<BackEnd>().habits[index].title, style: TextStyle(color: Colors.grey.shade100),),
                     const Spacer(),

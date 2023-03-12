@@ -154,7 +154,7 @@ class BackEnd extends ChangeNotifier{
         ),
       ],
     );
-    updateProgressToday();
+    // updateProgressToday();
     notifyListeners();
   }
 }

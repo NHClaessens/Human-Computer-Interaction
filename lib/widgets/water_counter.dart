@@ -115,7 +115,7 @@ class _WaterCounterState extends State<WaterCounter> {
                 child: TextField(
                   controller: waterController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration.collapsed(
+                  decoration: const InputDecoration(
                     hintText: "__",
                   ),
                   onSubmitted: (value) {
