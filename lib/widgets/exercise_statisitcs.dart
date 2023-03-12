@@ -74,7 +74,7 @@ class ExercisesStatistics extends StatelessWidget {
               Column(
                 children: [
                   Text("1256/2200", style: Constants().smallText),
-                  Text("kcal burned today", style: Constants().smallText.copyWith(color: Colors.grey))
+                  Text("kcal burned", style: Constants().smallText.copyWith(color: Colors.grey))
                 ],
               ),
               const Spacer(),

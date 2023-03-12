@@ -53,11 +53,11 @@ class _ProgressState extends State<Progress> {
               children: [
                 Row(
                   children: [
-                    FaIcon(context.read<BackEnd>().habits[index].icon, color: Constants().accentColor,),
+                    SizedBox(width: 20, height: 20, child: FaIcon(context.read<BackEnd>().habits[index].icon, color: Constants().accentColor,)),
                     Constants().spacing,
                     Text(context.read<BackEnd>().habits[index].title, style: TextStyle(color: Colors.grey.shade100),),
                     const Spacer(),
-                    Text("${context.read<BackEnd>().habits[index].current}/${context.read<BackEnd>().habits[index].goal}", style: TextStyle(color: Colors.grey.shade100),),
+                    Text("${context.read<BackEnd>().habits[index].current}/${context.read<BackEnd>().habits[index].goal} ${context.read<BackEnd>().habits[index].unit}", style: TextStyle(color: Colors.grey.shade100),),
                   ],
                 ),
                 Row(

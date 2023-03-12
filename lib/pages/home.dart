@@ -50,8 +50,7 @@ class _HomeState extends State<Home> {
           style: Constants().largeText
         ),
         Text(
-          //TODO make this responsive?
-          "february",
+          DateFormat.EEEE().format(DateTime.now()).toLowerCase(),
           style: Constants().mediumText
         ),
         Row(

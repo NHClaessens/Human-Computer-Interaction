@@ -28,18 +28,25 @@ class BackEnd extends ChangeNotifier{
 
   late List<HabitModel> habits = [
     HabitModel(
-      icon: FontAwesomeIcons.book, 
+      icon: FontAwesomeIcons.glassWater, 
       title: "Drink water", 
       current: currentWater.toInt(), 
       goal: waterGoal.toInt(), 
-      unit: "pcs"
+      unit: "ml"
     ),
     HabitModel(
-      icon: FontAwesomeIcons.book, 
-      title: "Habits created", 
-      current: 1, 
+      icon: FontAwesomeIcons.dumbbell, 
+      title: "Do pushups", 
+      current: 0, 
       goal: 10, 
-      unit: "pcs"
+      unit: ""
+    ),
+    HabitModel(
+      icon: FontAwesomeIcons.peace, 
+      title: "Meditate", 
+      current: 0, 
+      goal: 10, 
+      unit: "minutes"
     ),
   ];
 
