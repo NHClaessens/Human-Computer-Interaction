@@ -60,6 +60,18 @@ class BackEnd extends ChangeNotifier{
     ),
   ];
 
+  void updateHabit(int index, double amount) {
+    habits[index].current += amount;
+    if(habits[index].current > habits[index].goal) habits[index].current = habits[index].goal;
+    notifyListeners();
+  }
+
+  void updateHabitPercent(int index, double amount) {
+    habits[index].current += habits[index].current * amount;
+    if(habits[index].current > habits[index].goal) habits[index].current = habits[index].goal;
+    notifyListeners();
+  }
+
   void updateProgressToday() {
     habitHistory[DateTime.now().weekday - 1] = getProgress();
     notifyListeners();

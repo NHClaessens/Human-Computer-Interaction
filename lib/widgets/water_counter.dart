@@ -66,7 +66,7 @@ class _WaterCounterState extends State<WaterCounter> {
                       const Spacer(),
                       FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 30,),
                       const Spacer(),
-                      const Text("150ml")
+                      const Text("+ 150ml")
                     ],
                   ),
                 ),
@@ -79,7 +79,7 @@ class _WaterCounterState extends State<WaterCounter> {
                       const Spacer(),
                       FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 35,),
                       const Spacer(),
-                      const Text("200ml")
+                      const Text("+ 200ml")
                     ],
                   ),
                 ),
@@ -92,7 +92,7 @@ class _WaterCounterState extends State<WaterCounter> {
                       const Spacer(),
                       FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 40,),
                       const Spacer(),
-                      const Text("250ml")
+                      const Text("+ 250ml")
                     ],
                   ),
                 ),
@@ -105,7 +105,7 @@ class _WaterCounterState extends State<WaterCounter> {
                       const Spacer(),
                       FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 45,),
                       const Spacer(),
-                      const Text("300ml")
+                      const Text("+ 300ml")
                     ],
                   ),
                 ),
@@ -118,7 +118,7 @@ class _WaterCounterState extends State<WaterCounter> {
                       const Spacer(),
                       FaIcon(FontAwesomeIcons.glassWaterDroplet, color: Constants().primaryColor, size: 50,),
                       const Spacer(),
-                      const Text("350ml")
+                      const Text("+ 350ml")
                     ],
                   ),
                 ),

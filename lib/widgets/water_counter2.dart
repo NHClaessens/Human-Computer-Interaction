@@ -33,6 +33,14 @@ class _WaterCounter2State extends State<WaterCounter2> {
         children: [
           Row(
             children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text("water intake", style: Constants().mediumText.copyWith(color: Constants().primaryColor)),
+                  Text("1.5 liters recommended", style: Constants().smallText.copyWith(color: Colors.grey)),
+                ],
+              ),
               const Spacer(),
               IconButton(onPressed: (){widget.switchView();}, icon: FaIcon(FontAwesomeIcons.rightLeft, color: Constants().primaryColor,), iconSize: 15),
             ],
@@ -62,7 +70,7 @@ class _WaterCounter2State extends State<WaterCounter2> {
                   controller: amountController,
                 ),
               ),
-              Text("ml"),
+              const Text("ml"),
               GestureDetector(
                 onTap: () {
                   context.read<BackEnd>().addWater(double.parse(amountController.text));
