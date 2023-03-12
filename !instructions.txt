@@ -1,0 +1,12 @@
+The web frontend can be accessed by the following URL:
+https://nhclaessens.github.io/Human-Computer-Interaction/#/
+
+Or can be run locally by running the included "run.bat" file
+This file will run the following two lines:
+start python -m http.server 8000 	- start a server on port 8000 to access the website
+start "" http://localhost:8000 		- open the default browser on localhost:8000 to view the website
+
+You can also choose to run these commands yourself:
+1. start a command prompt in the current directory
+2. run "python -m http.server:8000"
+3. open your browser and navigate to "http://localhost:8000"
