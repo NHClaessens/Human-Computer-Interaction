@@ -1,3 +1,4 @@
+import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -8,7 +9,9 @@ import 'package:wellbeing_tracker/constants.dart';
 import 'package:wellbeing_tracker/provider.dart';
 
 class ExercisesStatistics extends StatelessWidget {
-  const ExercisesStatistics({super.key});
+  ExercisesStatistics({super.key});
+
+  final TextEditingController weightController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,29 +31,56 @@ class ExercisesStatistics extends StatelessWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text("weight", style: Constants().mediumText,),
-                  Text("${context.read<BackEnd>().weight} KG", style: Constants().largeText.copyWith(color: Colors.white),),
+                  Text("${context.watch<BackEnd>().weight} KG", style: Constants().largeText.copyWith(color: Colors.white),),
                   const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: Constants().accentColor,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Row(
-                      children: [
-                        FaIcon(FontAwesomeIcons.weightScale, color: Constants().primaryColor,),
-                        Constants().spacing,
-                        Text("${context.read<BackEnd>().weightLoss} kg", style: Constants().mediumText.copyWith(color: Constants().primaryColor))
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      context.read<BackEnd>().setPopup(
+                        SizedBox(
+                          width: 200,
+                          height: 100,
+                          child: TextField(
+                            decoration: const InputDecoration(
+                              hintText: "Current weight in kg"
+                            ),
+                            keyboardType: TextInputType.number,
+                            controller: weightController,
+                          ),
+                        ),
+                        (){
+                          context.read<BackEnd>().addWeight(double.parse(weightController.text));
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                      decoration: BoxDecoration(
+                        color: Constants().accentColor,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Row(
+                        children: [
+                          FaIcon(FontAwesomeIcons.weightScale, color: Constants().primaryColor,),
+                          Constants().spacing,
+                          Text("${context.read<BackEnd>().weightLoss} kg", style: Constants().mediumText.copyWith(color: Constants().primaryColor))
+                        ],
+                      ),
                     ),
                   )
                 ],
               ),
-              Column(
-                children: [
-                  // TODO maybe add graph thingy here
-                ],
-              ),
+              Expanded(
+                child: Sparkline(
+                  data: context.watch<BackEnd>().weights,
+                  useCubicSmoothing: true,
+                  cubicSmoothingFactor: 0.2,
+                  lineColor: Colors.white,
+                  lineWidth: 2,
+                  pointsMode: PointsMode.last,
+                  pointColor: Colors.white,
+                  pointSize: 10,
+                ),
+              )
             ],
           ),
         ),

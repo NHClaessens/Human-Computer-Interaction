@@ -22,7 +22,7 @@ class _ExerciseState extends State<Exercise> {
       children: [
         Text("my workouts", style: Constants().largeText,),
         Constants().spacing,
-        const ExercisesStatistics(),
+        ExercisesStatistics(),
         Constants().spacing,
         Text("workout ideas", style: Constants().largeText,),
         const ExerciseIdeas(),
