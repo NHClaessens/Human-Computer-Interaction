@@ -166,12 +166,15 @@ class _HabitListState extends State<HabitList> {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    // color: habits[index].current == habits[index].goal ? Constants().primaryColor : Colors.white,
                   ),
                   child: Row(
                     children: [
                       GestureDetector(
                         onTap: () {
+                          if(habits[index].current == habits[index].goal) {
+                            context.read<BackEnd>().resetHabit(index);
+                            return;
+                          }
                           context.read<BackEnd>().setPopup(
                             SizedBox(
                               width: 250,
