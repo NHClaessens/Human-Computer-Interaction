@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_iconpicker/Models/IconPack.dart';
+import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wellbeing_tracker/constants.dart';
@@ -18,6 +20,7 @@ class _HabitListState extends State<HabitList> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController goalController = TextEditingController();
   final TextEditingController unitController = TextEditingController();
+  IconData? icon;
 
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
 
@@ -77,16 +80,34 @@ class _HabitListState extends State<HabitList> {
                               hintText: "Unit"
                             ),
                           ),
+                          Constants().spacing,
+                          //TODO kinda scuffed you cant see it but whatevs
+                          GestureDetector(
+                            onTap: () async {
+                             IconData? i = await FlutterIconPicker.showIconPicker(context, iconPackModes: [IconPack.fontAwesomeIcons]);
+                              setState(() {
+                                icon = i;
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                color: Constants().primaryColor,
+                                borderRadius: BorderRadius.circular(16)
+                              ),
+                              child: const Text("Choose icon", style: TextStyle(color: Colors.white),),
+                            ),
+                          ),
                         ],
                       ),
                     ), 
                     (){
                       context.read<BackEnd>().habits.add(
                         HabitModel(
-                          icon: FontAwesomeIcons.book, 
+                          icon: icon ?? FontAwesomeIcons.book, 
                           title: titleController.text, 
                           current: 0, 
-                          goal: int.parse(goalController.text), 
+                          goal: double.parse(goalController.text), 
                           unit: unitController.text
                         )
                       );
@@ -112,32 +133,40 @@ class _HabitListState extends State<HabitList> {
               ),
             );
           }
-          return Container(
-            margin: const EdgeInsets.symmetric(vertical: 4),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: habits[index].current == habits[index].goal ? Constants().primaryColor : Colors.white,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    habits[index].current == habits[index].goal 
-                      ? context.read<BackEnd>().resetHabit(index)
-                      : context.read<BackEnd>().completeHabit(index);
-                  },
-                  child: CircleAvatar(
+          return GestureDetector(
+            onTap: () {
+              habits[index].current == habits[index].goal 
+                ? context.read<BackEnd>().resetHabit(index)
+                : context.read<BackEnd>().completeHabit(index);
+            },
+            onLongPress: (){
+              context.read<BackEnd>().setPopup(
+                const Text("Do you want to remove this habit?"),
+                (){
+                  context.read<BackEnd>().removeHabit(index);
+                },
+              );
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 4),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: habits[index].current == habits[index].goal ? Constants().primaryColor : Colors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Row(
+                children: [
+                  CircleAvatar(
                     backgroundColor: Constants().accentColor,
                     radius: 20,
                     child: habits[index].current == habits[index].goal ? FaIcon(FontAwesomeIcons.check, color: Constants().primaryColor,) : null,
                   ),
-                ),
-                const Spacer(),
-                Text(habits[index].title, style: Constants().mediumText.copyWith(color: habits[index].current == habits[index].goal ? Colors.white : Constants().primaryColor),),
-                const Spacer(),
-                FaIcon(habits[index].icon, color: habits[index].current == habits[index].goal ? Constants().accentColor : Constants().primaryColor,),
-              ],
+                  const Spacer(),
+                  Text(habits[index].title, style: Constants().mediumText.copyWith(color: habits[index].current == habits[index].goal ? Colors.white : Constants().primaryColor),),
+                  const Spacer(),
+                  FaIcon(habits[index].icon, color: habits[index].current == habits[index].goal ? Constants().accentColor : Constants().primaryColor,),
+                ],
+              ),
             ),
           );
         },

@@ -16,7 +16,7 @@ class Progress extends StatefulWidget {
 
 class _ProgressState extends State<Progress> {
 
-  Widget progressBar(int current, int goal) {
+  Widget progressBar(double current, double goal) {
     return SizedBox(
       height: 5,
       width: MediaQuery.of(context).size.width - 130,

@@ -32,6 +32,7 @@ class _CalorieCounterState extends State<CalorieCounter> {
             children: [
               Text("calories", style: Constants().mediumText.copyWith(color: Colors.white),),
               CircularPercentIndicator(
+                animateFromLastPercent: true,
                 radius: MediaQuery.of(context).size.width * 0.20,
                 lineWidth: 20,
                 percent: context.watch<BackEnd>().currentCalories / context.watch<BackEnd>().calorieGoal,

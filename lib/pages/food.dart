@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:wellbeing_tracker/constants.dart';
+import 'package:wellbeing_tracker/provider.dart';
 import 'package:wellbeing_tracker/widgets/calorie_counter.dart';
 import 'package:wellbeing_tracker/widgets/colored_box.dart';
 import 'package:wellbeing_tracker/widgets/water_counter.dart';
 import 'dart:math' as math;
+
+import 'package:wellbeing_tracker/widgets/water_counter2.dart';
 
 class Food extends StatefulWidget {
   const Food({super.key});
@@ -17,6 +21,8 @@ class Food extends StatefulWidget {
 }
 
 class _FoodState extends State<Food> {
+  final TextEditingController calorieAmountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -37,7 +43,24 @@ class _FoodState extends State<Food> {
               CircleAvatar(
                 radius: 20,
                 backgroundColor: Constants().primaryColor,
-                child: IconButton(onPressed: (){}, icon: FaIcon(FontAwesomeIcons.plus, color: Constants().accentColor), splashColor: Colors.transparent,)
+                child: IconButton(onPressed: (){
+                  context.read<BackEnd>().setPopup(
+                    SizedBox(
+                      width: 200,
+                      height: 100,
+                      child: TextField(
+                        controller: calorieAmountController,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          hintText: "amount of calories"
+                        ),
+                      ),
+                    ),
+                    (){
+                      context.read<BackEnd>().addCalories(int.parse(calorieAmountController.text));
+                    }
+                  );
+                }, icon: FaIcon(FontAwesomeIcons.plus, color: Constants().accentColor), splashColor: Colors.transparent,)
               )
             ],
           ),
@@ -46,6 +69,7 @@ class _FoodState extends State<Food> {
         const CalorieCounter(),
         Constants().spacing,
         const WaterCounter(),
+        const WaterCounter2(),
         Text("meal plans", style: Constants().largeText,),
         SizedBox(
           height: 125,

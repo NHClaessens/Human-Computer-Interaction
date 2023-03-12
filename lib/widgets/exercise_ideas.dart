@@ -16,8 +16,8 @@ class ExerciseIdeas extends StatefulWidget {
 
 class _ExerciseIdeasState extends State<ExerciseIdeas> {
 
-  Widget exerciseTile(String title1, String title2, int duration) {
-    return ColoredContainer(width: 250, title1: title1, title2: title2, button:  Row(
+  Widget exerciseTile(String title1, String title2, int duration, Color? color) {
+    return ColoredContainer(width: 250, title1: title1, title2: title2, color: color, button:  Row(
         children: [
           const FaIcon(FontAwesomeIcons.stopwatch, color: Colors.white,),
           Constants().spacing,
@@ -45,30 +45,30 @@ class _ExerciseIdeasState extends State<ExerciseIdeas> {
       scrollDirection: Axis.horizontal,
       physics: const AlwaysScrollableScrollPhysics(),
       children: [
-        exerciseTile("daily", "warmup", 15),
-        exerciseTile("full body", "workout", 35),
-        exerciseTile("strength", "training", 20),
-        exerciseTile("core", "strengthening", 25),
+        exerciseTile("daily", "warmup", 15, Constants().accentColor),
+        exerciseTile("full body", "workout", 35, Constants().accentColor),
+        exerciseTile("strength", "training", 20, Constants().accentColor),
+        exerciseTile("core", "strengthening", 25, Constants().accentColor),
       ],
     ),
     ListView(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
       children: [
-        exerciseTile("daily", "warmup", 25),
-        exerciseTile("full body", "workout", 45),
-        exerciseTile("strength", "training", 30),
-        exerciseTile("core", "strengthening", 35),
+        exerciseTile("daily", "warmup", 25, Colors.yellow.shade100),
+        exerciseTile("full body", "workout", 45, Colors.yellow.shade100),
+        exerciseTile("strength", "training", 30, Colors.yellow.shade100),
+        exerciseTile("core", "strengthening", 35, Colors.yellow.shade100),
       ],
     ),
     ListView(
       scrollDirection: Axis.horizontal,
       shrinkWrap: true,
       children: [
-        exerciseTile("daily", "warmup", 35),
-        exerciseTile("full body", "workout", 55),
-        exerciseTile("strength", "training", 40),
-        exerciseTile("core", "strengthening", 45),
+        exerciseTile("daily", "warmup", 35, Colors.orange.shade100),
+        exerciseTile("full body", "workout", 55, Colors.orange.shade100),
+        exerciseTile("strength", "training", 40, Colors.orange.shade100),
+        exerciseTile("core", "strengthening", 45, Colors.orange.shade100),
       ],
     ),
   ];
@@ -87,7 +87,7 @@ class _ExerciseIdeasState extends State<ExerciseIdeas> {
                   color: _index == 0 ? Constants().primaryColor : Colors.transparent,
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Text("Beginner", style: Constants().smallText.copyWith(color: _index == 0 ? Constants().accentColor : Colors.grey),),
+                child: Text("beginner", style: Constants().smallText.copyWith(color: _index == 0 ? Constants().accentColor : Colors.grey),),
               ),
             ),
             Constants().spacing,
@@ -99,7 +99,7 @@ class _ExerciseIdeasState extends State<ExerciseIdeas> {
                   color: _index == 1 ? Constants().primaryColor : Colors.transparent,
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Text("Intermediate", style: Constants().smallText.copyWith(color: _index == 1 ? Constants().accentColor : Colors.grey),),
+                child: Text("intermediate", style: Constants().smallText.copyWith(color: _index == 1 ? Constants().accentColor : Colors.grey),),
               ),
             ),
             Constants().spacing,
@@ -111,7 +111,7 @@ class _ExerciseIdeasState extends State<ExerciseIdeas> {
                   color: _index == 2 ? Constants().primaryColor : Colors.transparent,
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Text("Expert", style: Constants().smallText.copyWith(color: _index == 2 ? Constants().accentColor : Colors.grey),),
+                child: Text("expert", style: Constants().smallText.copyWith(color: _index == 2 ? Constants().accentColor : Colors.grey),),
               ),
             ),
             Constants().spacing,

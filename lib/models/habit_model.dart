@@ -4,8 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class HabitModel {
   IconData icon;
   String title;
-  int current;
-  int goal;
+  double current;
+  double goal;
   String unit;
 
   HabitModel({

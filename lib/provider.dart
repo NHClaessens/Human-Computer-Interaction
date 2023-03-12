@@ -11,18 +11,29 @@ class BackEnd extends ChangeNotifier{
   int weight = 78;
   int weightLoss = -8;
 
+  int currentMood = -1;
+
   int currentCalories = 0;
   int calorieGoal = 3000;
 
   double currentWater = 0;
   double waterGoal = 1500;
 
+  void addWater(double water) {
+    setWater(currentWater + water);
+  }
+
   void setWater(double water) {
     currentWater = water;
     if(currentWater > waterGoal) {
       currentWater = waterGoal;
     }
-    habits[0].current = currentWater.toInt();
+    habits[0].current = currentWater;
+    notifyListeners();
+  }
+
+  void addCalories(int calories) {
+    currentCalories += calories;
     notifyListeners();
   }
 
@@ -30,8 +41,8 @@ class BackEnd extends ChangeNotifier{
     HabitModel(
       icon: FontAwesomeIcons.glassWater, 
       title: "Drink water", 
-      current: currentWater.toInt(), 
-      goal: waterGoal.toInt(), 
+      current: currentWater, 
+      goal: waterGoal, 
       unit: "ml"
     ),
     HabitModel(
@@ -162,6 +173,11 @@ class BackEnd extends ChangeNotifier{
       ],
     );
     // updateProgressToday();
+    notifyListeners();
+  }
+
+  void removeHabit(int index) {
+    habits.removeAt(index);
     notifyListeners();
   }
 }
