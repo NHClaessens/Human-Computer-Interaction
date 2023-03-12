@@ -19,9 +19,14 @@ class _HabitListState extends State<HabitList> {
   final TextEditingController goalController = TextEditingController();
   final TextEditingController unitController = TextEditingController();
 
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+
   @override
   Widget build(BuildContext context) {
     List<HabitModel> habits = context.watch<BackEnd>().habits;
+
+
+
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -30,6 +35,7 @@ class _HabitListState extends State<HabitList> {
         borderRadius: BorderRadius.circular(16),
       ),
       child: ListView.builder(
+        key: _listKey,
         padding: const EdgeInsets.all(0),
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -77,13 +83,17 @@ class _HabitListState extends State<HabitList> {
                     (){
                       context.read<BackEnd>().habits.add(
                         HabitModel(
-                          icon: FaIcon(FontAwesomeIcons.book, color: Constants().accentColor,), 
+                          icon: FontAwesomeIcons.book, 
                           title: titleController.text, 
                           current: 0, 
                           goal: int.parse(goalController.text), 
                           unit: unitController.text
                         )
                       );
+                      context.read<BackEnd>().updateProgressToday();
+                      titleController.clear();
+                      goalController.clear();
+                      unitController.clear();
                     }
                   );
                 },
@@ -126,7 +136,7 @@ class _HabitListState extends State<HabitList> {
                 const Spacer(),
                 Text(habits[index].title, style: Constants().mediumText.copyWith(color: habits[index].current == habits[index].goal ? Colors.white : Constants().primaryColor),),
                 const Spacer(),
-                habits[index].icon
+                FaIcon(habits[index].icon, color: habits[index].current == habits[index].goal ? Constants().accentColor : Constants().primaryColor,),
               ],
             ),
           );

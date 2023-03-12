@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wellbeing_tracker/constants.dart';
 import 'package:wellbeing_tracker/provider.dart';
@@ -52,7 +53,7 @@ class _ProgressState extends State<Progress> {
               children: [
                 Row(
                   children: [
-                    context.read<BackEnd>().habits[index].icon,
+                    FaIcon(context.read<BackEnd>().habits[index].icon),
                     Constants().spacing,
                     Text(context.read<BackEnd>().habits[index].title, style: TextStyle(color: Colors.grey.shade100),),
                     const Spacer(),
