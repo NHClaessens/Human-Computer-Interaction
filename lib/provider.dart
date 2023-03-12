@@ -64,6 +64,7 @@ class BackEnd extends ChangeNotifier{
     habits[index].current += amount;
     if(habits[index].current > habits[index].goal) habits[index].current = habits[index].goal;
     if(index == 0) currentWater = habits[0].current;
+    habitHistory[DateTime.now().weekday - 1] = getProgress();
     notifyListeners();
   }
 
@@ -71,6 +72,7 @@ class BackEnd extends ChangeNotifier{
     habits[index].current += habits[index].current * amount;
     if(habits[index].current > habits[index].goal) habits[index].current = habits[index].goal;
     if(index == 0) currentWater = habits[0].current;
+    habitHistory[DateTime.now().weekday - 1] = getProgress();
     notifyListeners();
   }
 
@@ -80,7 +82,7 @@ class BackEnd extends ChangeNotifier{
   }
 
   double getProgress() {
-    return habits.where((element) => element.current == element.goal).length / habits.length;
+    return habits.isEmpty ? 1 : habits.where((element) => element.current == element.goal).length / habits.length;
   }
 
   void completeHabit(int index) {
@@ -191,6 +193,7 @@ class BackEnd extends ChangeNotifier{
 
   void removeHabit(int index) {
     habits.removeAt(index);
+    habitHistory[DateTime.now().weekday - 1] = getProgress();
     notifyListeners();
   }
 

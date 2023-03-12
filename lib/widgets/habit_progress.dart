@@ -38,11 +38,11 @@ class _HabitProgressState extends State<HabitProgress> {
             animateFromLastPercent: true,
             radius: 40,
             lineWidth: 10,
-            percent: context.read<BackEnd>().habits.where((element) => element.current >= element.goal).length / context.read<BackEnd>().habits.length,
+            percent: context.watch<BackEnd>().habits.isEmpty ? 1 :context.read<BackEnd>().habits.where((element) => element.current >= element.goal).length / context.read<BackEnd>().habits.length,
             circularStrokeCap: CircularStrokeCap.round,
             progressColor: Colors.white,
             backgroundColor: Colors.blueGrey,
-            center: Text("${(context.watch<BackEnd>().habits.where((element) => element.current >= element.goal).length / context.read<BackEnd>().habits.length * 100).floor()}%", style: Constants().mediumText.copyWith(color: Colors.white)),
+            center: Text("${context.watch<BackEnd>().habits.isEmpty ? 100 : (context.watch<BackEnd>().habits.where((element) => element.current >= element.goal).length / context.read<BackEnd>().habits.length * 100).floor()}%", style: Constants().mediumText.copyWith(color: Colors.white)),
           )
         ],
       ),
