@@ -49,6 +49,7 @@ class ExercisesStatistics extends StatelessWidget {
                         ),
                         (){
                           context.read<BackEnd>().addWeight(double.parse(weightController.text));
+                          weightController.clear();
                         },
                       );
                     },
@@ -60,9 +61,9 @@ class ExercisesStatistics extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
+                          Constants().spacing,
                           FaIcon(FontAwesomeIcons.weightScale, color: Constants().primaryColor,),
                           Constants().spacing,
-                          Text("${context.read<BackEnd>().weightLoss} kg", style: Constants().mediumText.copyWith(color: Constants().primaryColor))
                         ],
                       ),
                     ),

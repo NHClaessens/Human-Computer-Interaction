@@ -9,7 +9,6 @@ import 'package:wellbeing_tracker/models/habit_model.dart';
 class BackEnd extends ChangeNotifier{
   String name = "nils";
   double weight = 78;
-  int weightLoss = -8;
 
   int currentMood = -1;
 

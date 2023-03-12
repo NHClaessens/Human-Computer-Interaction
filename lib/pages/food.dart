@@ -22,6 +22,13 @@ class Food extends StatefulWidget {
 
 class _FoodState extends State<Food> {
   final TextEditingController calorieAmountController = TextEditingController();
+  bool water1 = true;
+
+  void switchWaterView() {
+    setState(() {
+      water1 = !water1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +75,8 @@ class _FoodState extends State<Food> {
         Constants().spacing,
         const CalorieCounter(),
         Constants().spacing,
-        const WaterCounter(),
-        const WaterCounter2(),
+        if(water1) WaterCounter(switchView: switchWaterView,),
+        if(!water1) WaterCounter2(switchView: switchWaterView,),
         Text("meal plans", style: Constants().largeText,),
         SizedBox(
           height: 125,

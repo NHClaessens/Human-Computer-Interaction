@@ -3,11 +3,16 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+
 import 'package:wellbeing_tracker/constants.dart';
 import 'package:wellbeing_tracker/provider.dart';
 
 class WaterCounter extends StatefulWidget {
-  const WaterCounter({super.key});
+  final VoidCallback switchView;
+  const WaterCounter({
+    Key? key,
+    required this.switchView,
+  }) : super(key: key);
 
   @override
   State<WaterCounter> createState() => _WaterCounterState();
@@ -32,8 +37,20 @@ class _WaterCounterState extends State<WaterCounter> {
         crossAxisAlignment: CrossAxisAlignment.baseline,
         textBaseline: TextBaseline.alphabetic,
         children: [
-          Text("water intake", style: Constants().mediumText.copyWith(color: Constants().primaryColor)),
-          Text("1.5 liters recommended", style: Constants().smallText.copyWith(color: Colors.grey)),
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text("water intake", style: Constants().mediumText.copyWith(color: Constants().primaryColor)),
+                  Text("1.5 liters recommended", style: Constants().smallText.copyWith(color: Colors.grey)),
+                ],
+              ),
+              const Spacer(),
+              IconButton(onPressed: (){widget.switchView();}, icon: FaIcon(FontAwesomeIcons.rightLeft, color: Constants().primaryColor,), iconSize: 15),
+            ],
+          ),
           Constants().spacing,
           SizedBox(
             height: 70,
