@@ -53,12 +53,6 @@ class _HomeState extends State<Home> {
           DateFormat.EEEE().format(DateTime.now()).toLowerCase(),
           style: Constants().mediumText
         ),
-        Row(
-          children: [
-            const Spacer(),
-            Text("Adjust your goals?", style: Constants().smallText.copyWith(color: Colors.grey).copyWith(fontFamily: "arial"),)
-          ],
-        ),
         const Progress(),
         Constants().spacing,
         Text(
