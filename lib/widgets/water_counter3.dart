@@ -8,21 +8,21 @@ import 'package:provider/provider.dart';
 import 'package:wellbeing_tracker/constants.dart';
 import 'package:wellbeing_tracker/provider.dart';
 
-class WaterCounter extends StatefulWidget {
+class WaterCounter3 extends StatefulWidget {
   final VoidCallback switchView;
-  const WaterCounter({
+  const WaterCounter3({
     Key? key,
     required this.switchView,
   }) : super(key: key);
 
   @override
-  State<WaterCounter> createState() => _WaterCounterState();
+  State<WaterCounter3> createState() => _WaterCounter3State();
 }
 
-class _WaterCounterState extends State<WaterCounter> {
+class _WaterCounter3State extends State<WaterCounter3> {
 
   final TextEditingController waterController = TextEditingController();
-  double waterToAdd = 0;
+  final TextEditingController amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -147,23 +147,19 @@ class _WaterCounterState extends State<WaterCounter> {
             ),
           ),
           Constants().spacing,
-          Center(child: Text("Add ${waterToAdd.floor().toString()} ml"),),
-          Constants().spacing,
-          Slider(
-            min: 0,
-            divisions: (context.read<BackEnd>().waterGoal / 10).round(),
-            max: context.read<BackEnd>().waterGoal,
-            value: waterToAdd,//context.watch<BackEnd>().currentWater, 
-            onChanged: (value){setState(() {
-              waterToAdd = value;
-            });},
-            activeColor: Constants().primaryColor,
-            inactiveColor: Colors.grey,
-          ),
-          Center(
-            child: GestureDetector(
+          Row(
+            children: [
+              const Spacer(),
+              SizedBox(
+                width: 50,
+                child: TextField(
+                  controller: amountController,
+                ),
+              ),
+              const Text("ml"),
+              GestureDetector(
                 onTap: () {
-                  context.read<BackEnd>().addWater(waterToAdd);
+                  context.read<BackEnd>().addWater(double.parse(amountController.text));
                 },
                 child: Container(
                   margin: const EdgeInsets.all(8),
@@ -175,6 +171,8 @@ class _WaterCounterState extends State<WaterCounter> {
                   child: Text("add", style: TextStyle(color: Colors.white)),
                 ),
               ),
+              const Spacer(),
+            ],
           )
         ],
       ),

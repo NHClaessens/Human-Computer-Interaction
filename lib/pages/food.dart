@@ -12,6 +12,7 @@ import 'package:wellbeing_tracker/widgets/water_counter.dart';
 import 'dart:math' as math;
 
 import 'package:wellbeing_tracker/widgets/water_counter2.dart';
+import 'package:wellbeing_tracker/widgets/water_counter3.dart';
 
 class Food extends StatefulWidget {
   const Food({super.key});
@@ -76,7 +77,7 @@ class _FoodState extends State<Food> {
         const CalorieCounter(),
         Constants().spacing,
         if(water1) WaterCounter(switchView: switchWaterView,),
-        if(!water1) WaterCounter2(switchView: switchWaterView,),
+        if(!water1) WaterCounter3(switchView: switchWaterView,),
         Text("meal plans", style: Constants().largeText,),
         SizedBox(
           height: 125,
