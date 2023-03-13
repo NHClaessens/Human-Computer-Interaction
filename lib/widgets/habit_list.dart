@@ -251,6 +251,9 @@ class _HabitListState extends State<HabitList> {
                                     decoration: const InputDecoration(
                                       hintText: "Custom amount",
                                     ),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(RegExp(r'[0-9\.-]')),
+                                    ],
                                   ),
                                 ],
                               ),
