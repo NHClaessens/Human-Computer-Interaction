@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -154,6 +155,9 @@ class _WaterCounter3State extends State<WaterCounter3> {
                 width: 50,
                 child: TextField(
                   controller: amountController,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9\.-]')),
+                  ],
                 ),
               ),
               const Text("ml"),

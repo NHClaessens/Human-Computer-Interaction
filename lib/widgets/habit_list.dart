@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_iconpicker/Models/IconPack.dart';
@@ -72,6 +73,9 @@ class _HabitListState extends State<HabitList> {
                             decoration: const InputDecoration(
                               hintText: "Goal"
                             ),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(RegExp(r'[0-9\.]')),
+                            ],
                           ),
                           TextField(
                             controller: unitController,
@@ -82,7 +86,7 @@ class _HabitListState extends State<HabitList> {
                           Constants().spacing,
                           GestureDetector(
                             onTap: () async {
-                             IconData? i = await FlutterIconPicker.showIconPicker(context, iconPackModes: [IconPack.fontAwesomeIcons]);
+                              IconData? i = await FlutterIconPicker.showIconPicker(context, iconPackModes: [IconPack.fontAwesomeIcons]);
                               setState(() {
                                 icon = i;
                               });
@@ -147,7 +151,7 @@ class _HabitListState extends State<HabitList> {
                   padding: const EdgeInsets.all(16),
                   height: 70,
                   decoration: BoxDecoration(
-                    color: habits[index].current == habits[index].goal ? Constants().primaryColor : Colors.white,
+                    color: habits[index].current >= habits[index].goal ? Constants().primaryColor : Colors.white,
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
@@ -157,7 +161,7 @@ class _HabitListState extends State<HabitList> {
                   height: 70,
                   width: (MediaQuery.of(context).size.width - 60) * context.read<BackEnd>().habits[index].current / context.read<BackEnd>().habits[index].goal,
                   decoration: BoxDecoration(
-                    color: habits[index].current == habits[index].goal ? Colors.transparent : Constants().accentColor,
+                    color: habits[index].current >= habits[index].goal ? Colors.transparent : Constants().accentColor,
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
@@ -171,7 +175,7 @@ class _HabitListState extends State<HabitList> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          if(habits[index].current == habits[index].goal) {
+                          if(habits[index].current >= habits[index].goal) {
                             context.read<BackEnd>().resetHabit(index);
                             return;
                           }
@@ -259,13 +263,13 @@ class _HabitListState extends State<HabitList> {
                         child: CircleAvatar(
                           backgroundColor: Colors.white,
                           radius: 20,
-                          child: habits[index].current == habits[index].goal ? FaIcon(FontAwesomeIcons.check, color: Constants().primaryColor,) : FaIcon(FontAwesomeIcons.plus, color: Constants().primaryColor,),
+                          child: habits[index].current >= habits[index].goal ? FaIcon(FontAwesomeIcons.check, color: Constants().primaryColor,) : FaIcon(FontAwesomeIcons.plus, color: Constants().primaryColor,),
                         ),
                       ),
                       const Spacer(),
-                      Text(habits[index].title, style: Constants().mediumText.copyWith(color: habits[index].current == habits[index].goal ? Colors.white : Constants().primaryColor),),
+                      Text(habits[index].title, style: Constants().mediumText.copyWith(color: habits[index].current >= habits[index].goal ? Colors.white : Constants().primaryColor),),
                       const Spacer(),
-                      FaIcon(habits[index].icon, color: habits[index].current == habits[index].goal ? Constants().accentColor : Constants().primaryColor,),
+                      FaIcon(habits[index].icon, color: habits[index].current >= habits[index].goal ? Constants().accentColor : Constants().primaryColor,),
                     ],
                   ),
                 ),
