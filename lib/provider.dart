@@ -24,15 +24,17 @@ class BackEnd extends ChangeNotifier{
 
   void setWater(double water) {
     currentWater = water;
-    if(currentWater > waterGoal) {
-      currentWater = waterGoal;
-    }
+    if(currentWater > waterGoal) currentWater = waterGoal;
+    if(currentWater < 0) currentWater = 0;
+    
     habits[0].current = currentWater;
     notifyListeners();
   }
 
   void addCalories(int calories) {
     currentCalories += calories;
+    if(currentCalories > calorieGoal) currentCalories = calorieGoal;
+    if(currentCalories < 0) currentCalories = 0;
     notifyListeners();
   }
 
@@ -63,14 +65,7 @@ class BackEnd extends ChangeNotifier{
   void updateHabit(int index, double amount) {
     habits[index].current += amount;
     if(habits[index].current > habits[index].goal) habits[index].current = habits[index].goal;
-    if(index == 0) currentWater = habits[0].current;
-    habitHistory[DateTime.now().weekday - 1] = getProgress();
-    notifyListeners();
-  }
-
-  void updateHabitPercent(int index, double amount) {
-    habits[index].current += habits[index].current * amount;
-    if(habits[index].current > habits[index].goal) habits[index].current = habits[index].goal;
+    if(habits[index].current < 0) habits[index].current = 0;
     if(index == 0) currentWater = habits[0].current;
     habitHistory[DateTime.now().weekday - 1] = getProgress();
     notifyListeners();
