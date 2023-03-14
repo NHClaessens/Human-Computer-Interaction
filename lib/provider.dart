@@ -27,7 +27,6 @@ class BackEnd extends ChangeNotifier{
     if(currentWater > waterGoal) currentWater = waterGoal;
     if(currentWater < 0) currentWater = 0;
     
-    habits[0].current = currentWater;
     notifyListeners();
   }
 
@@ -39,13 +38,6 @@ class BackEnd extends ChangeNotifier{
   }
 
   late List<HabitModel> habits = [
-    HabitModel(
-      icon: FontAwesomeIcons.glassWater, 
-      title: "Drink water", 
-      current: currentWater, 
-      goal: waterGoal, 
-      unit: "ml"
-    ),
     HabitModel(
       icon: FontAwesomeIcons.dumbbell, 
       title: "Do pushups", 
@@ -66,7 +58,6 @@ class BackEnd extends ChangeNotifier{
     habits[index].current += amount;
     if(habits[index].current > habits[index].goal) habits[index].current = habits[index].goal;
     if(habits[index].current < 0) habits[index].current = 0;
-    if(index == 0) currentWater = habits[0].current;
     habitHistory[DateTime.now().weekday - 1] = getProgress();
     notifyListeners();
   }
@@ -83,10 +74,6 @@ class BackEnd extends ChangeNotifier{
   void completeHabit(int index) {
     habits[index].current = habits[index].goal;
 
-    if(index == 0) {
-      currentWater = waterGoal;
-    }
-
     updateProgressToday();
 
     notifyListeners();
@@ -94,10 +81,6 @@ class BackEnd extends ChangeNotifier{
 
   void resetHabit(int index) {
     habits[index].current = 0;
-
-    if(index == 0) {
-      currentWater = 0;
-    }
 
     updateProgressToday();
 
@@ -136,7 +119,6 @@ class BackEnd extends ChangeNotifier{
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                // textBaseline: TextBaseline.alphabetic,
                 children: [
                   widget,
                   Constants().spacing,
